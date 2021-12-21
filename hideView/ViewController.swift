@@ -8,12 +8,37 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var ditelTextLabel: UILabel!
+    @IBOutlet weak var exchangeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        hideItem()
+        takePhoto()
     }
-
-
+    
+    ///偵測截圖動作
+    func takePhoto() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didTakeScreenshot(notification:)), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+    }
+    @objc func didTakeScreenshot(notification:Notification) -> Void {
+        print("Screen Shot Taken")
+    }
+    
+    
+    ///截圖隱藏物件
+    func hideItem() {
+        itemImage.makeSecure()
+        itemNameLabel.makeSecure()
+        ditelTextLabel.makeSecure()
+        exchangeButton.makeSecure()
+    
+    }
 }
+
+   
 
